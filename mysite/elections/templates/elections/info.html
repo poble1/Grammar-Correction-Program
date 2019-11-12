@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
   <title>높임말 교정기</title>
   <meta charset="utf-8">
@@ -15,6 +15,8 @@
       a:link { color: white; text-decoration: none;}
       a:visited { color: white; text-decoration: none;}
       a:hover { color: #C5C5C5; text-decoration: none;}
+
+      b{font-size: 15px; color : gray;font-weight: normal; padding:25px;}
 
       body{
           background-color:white;
@@ -62,9 +64,9 @@
           padding-left:20px;
       }
       .box-header h3 {
-          padding:0px;
+          padding-top: 6px;
+          padding-bottom: 6px;
           margin:0px;
-          margin-bottom: 4px;
           font-size:20px;
           line-height: 5px;
       }
@@ -134,6 +136,7 @@
       }
   </style>
 </head>
+
 <body>
 <div id="viewport">
 
@@ -144,40 +147,58 @@
         <div class="title-box"><i class="ri-double-quotes-l"></i><br>높임말<br>교정기</div>
         </div>
 </div>
+
     <div class="col-md-8">
         <div class="div-middle">
             <div class="wrapper" style="width:100%">
             <div class="box-contents">
               <div class="box-header">
-                  <h3>교정 전</h3>
-                  <small>아래에 문장을 입력해주세요</small>
-                </div>
-              <form method="post" class="input-box">
-                  {%csrf_token%}
-                  <input type="hidden" name="csrfmiddlewaretoken" value="nYGv7Hv3dRZocoqvMBZUvJaP4aKYh6JzNiaSJtoQjl9C51vxzwpP8bnPARcY4Gwl">
-                      <textarea name="text" cols="40" rows="10" id="id_text" required="required"></textarea>
-                      <!--<button type="button" class="btn btn-primary active">Active Primary</button>-->
-                  {%csrf_token%}
-                  <input type = "submit" class="btn btn-secondary btn-lg" id="submit-btn" name = "test1" value="검사하기">
+                  <h3>팀 원</h3>
+              </div>
+                <form class="input-box">
+                    <br>
+                    <br>
+                    <b>
+                    <i class="ri-home-2-line"></i>
+                     팀장 : 장윤정 </b>
+                    <b>
+                    <i class="ri-home-2-line"></i>
+                    팀원 : 임리나 </b>
+                    <br><br><br>
+                    <b>
+                    <i class="ri-home-2-line"></i> 지도교수 :  이재성 교수님<br></b>
+                    <br>
+                    <br>
+                    <b>
+                    <i class="ri-home-2-line"></i>
+                    디자인 : 구본철</b>
+                    <br>
+                    <br>
                 </form>
+
             </div>
-            <div class="menu-box">
-               <label for="input-btn" class="activated"><i class="ri-edit-2-line"></i>
-               <small>입력</small>
-               </label>
-               <label for="submit-btn"><i class="ri-format-clear"></i>
-               <small>교정</small>
-                </label>
-                <label for="info-btn"><a href="/info"><i class="ri-group-line"></i>
-                    <small>팀원</small></a>
-                </label>
-            </div>
-            </div>
+
+                <div class="menu-box">
+                    <label for="input-btn" ><a href="/index"><i class="ri-edit-2-line"></i>
+                        <small>입력</small></a>
+                    </label>
+                    <label for="submit-btn"><i class="ri-format-clear"></i>
+                        <small>교정</small>
+                    </label>
+                    <label for="info-btn" class="activated"><i class="ri-group-line"></i>
+                        <small>팀원</small>
+                    </label>
+                </div>
+
+
+
     </div>
     </div>
+
 </div>
 </div>
-    </div>
+</div>
+</div>
 </body>
 
 

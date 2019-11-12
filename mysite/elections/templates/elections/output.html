@@ -1,39 +1,270 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>높임말 교정기</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.remixicon.com/releases/v2.0.0/remixicon.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
+  <style>
+     a:link { color: white; text-decoration: none;}
+     a:visited { color: white; text-decoration: none;}
+     a:hover { color: #C5C5C5; text-decoration: none;}
+
+     body{
+          background-color:white;
+          //background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+          font-family: 'Noto Sans KR', sans-serif;
+          height:100vh;
+      }
+      .viewport {
+          height:100vh;
+      }
+      .col-centered {
+          height:100vh;
+      }
+    .div-middle {
+      min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+      min-height: 90vh; /* These two lines are counted as one :-)       */
+      display: flex;
+      align-items: center;
+        width:100%;
+    }
+      .title-box {
+          display:block;
+          text-align: center;
+          width:100%;
+      }
+      .title-box i {
+          color:#FFCF62;
+          text-align: center;
+          font-size:120px;
+          border-top:4px solid #FFCF62;
+      }
+      .title-box {
+          padding-left:60px;
+          color:#6B6B6B;
+          font-size:40px;
+          line-height: 40px;
+      }
+      .box-header {
+          background-color:#C5C5C5;
+          width:100%;
+          display:block;
+          color:White;
+          height:60px;
+          padding-top:20px;
+          padding-left:20px;
+      }
+      .box-header h3 {
+          padding:0px;
+          margin:0px;
+          margin-bottom: 4px;
+          font-size:20px;
+          line-height: 5px;
+      }
+      .box-header small {
+          font-size:10px;
+          line-height: 5px;
+          color:#F1F1F1;
+      }
+      .box-contents {
+          width:calc(100% - 60px);
+          background-color:#F1F1F1;
+          display:inline;
+          float:left;
+          height:465px;
+      }
+      .input-box {
+          width:100%;
+          padding:20px;
+          padding-top:0px;
+          color:#242424;
+      }
+      .input-box input {
+          width:100%;
+      }
+      .input-box textarea {
+          width:100%;
+          height:400px;
+          background-color:#F1F1F1;
+          border:none;
+          padding:20px;
+          color:#242424;
+      }
+      textarea:focus {
+          outline:none;
+      }
+      .menu-box {
+          width:50px;
+          display:inline;
+          float:right;
+          height:465px;
+          background-color:#FFCF62;
+          padding-top:140px;
+      }
+      .menu-box label {
+          color:white;
+          font-size:25px;
+          padding:13px;
+          height:50px;
+          line-height: 10px;
+          text-align: center;
+          margin:0px;
+      }
+      .menu-box label.activated {
+          background-color:rgba(255,255,255,0.7);
+          color:dimgray;
+      }
+      .activated:hover{
+          background-color:rgba(255,255,255,0.7)!important;
+      }
+      .menu-box label small {
+          font-size:10px;
+          text-align:center;
+      }
+      .menu-box label:hover {
+          background-color:rgba(255,255,255,0.3)
+      }
+      #submit-btn{
+          display:none
+      }
+      .each-box {
+          padding-top:30px;
+          //border-bottom:1px solid #C5C5C5;
+          padding-bottom:10px;
+          font-size:20px;
+      }
+      .each-box .original {
+          background-color:#3FD57F;
+          color:white;
+          padding:5px;
+          padding-left:10px;
+          padding-right:10px;
+          border-radius: 10px;
+      }
+      .each-box .description {
+          padding-left:10px;
+          padding-right:10px;
+          color:#3FD57F;
+      }
+
+      .each-box.wrong {
+          padding-top:10px;
+          padding-bottom:10px;
+      }
+      .each-box.wrong .original {
+          background-color:#F1F1F1;
+          color:#242424;
+          display:inline;
+          height:40px;
+          float:left;
+          vertical-align: bottom;
+          padding-top:34px;
+      }
+      .each-box.wrong .wrong-sentence {
+          color:red;
+          text-decoration: line-through;
+          margin-top:10px;
+      }
+      .each-box.wrong .changed {
+          color:red;
+          background-color:red;
+          padding:12px;
+          color:white;
+          padding-left:5px;
+          padding-right:5px;
+          border-radius: 10px;
+          text-align: center;
+      }
+      .each-box.wrong .change-box {
+          display:inline;
+          float:left;
+          line-height: 10px;
+      }
+      .block-hr{
+          display:block;
+      }
+  </style>
 </head>
+<body>
+<div id="viewport">
 
-
-<div class="jumbotron text-center">
-  <h1>[02-15]높임말 교정기</h1>
-  <p>조원 : 장윤정, 임리나</p>
-</div>
-
-
-<div class="col-md-12">
-        <h3><center><strong>교정 후</strong></center></h3>
-
-        <div class="form-group">
-            <form action="/output/" method="post">
-            <textarea class="form-control" rows="10" cols="20" id="output1" wrap=on style="font-size:30px;" readonly >{{string}}</textarea>
-            </form>
+<div class="col-centered div-middle">
+<div class="row" style="width:100%;">
+<div class="col-md-3">
+        <div class="div-middle">
+        <div class="title-box"><i class="ri-double-quotes-l"></i><br>높임말<br>교정기</div>
         </div>
-
-        <form action="/index/" method="get">
-        <center>
-            <input type = submit class="btn btn-secondary btn-lg" name = "test2" value="돌아가기">
-        </center>
-        </form>
-
 </div>
-
-
+    <div class="col-md-8">
+        <div class="div-middle">
+            <div class="wrapper" style="width:100%">
+            <div class="box-contents"; style="overflow:scroll;" >
+              <div class="box-header">
+                  <h3>교정 후</h3>
+                  <small>아래는 교정된 문장입니다.</small>
+                </div>
+              <div class="input-box">
+                  {% for sent in sentList %}
+                    {% if sent.1 == "-1" %}
+                         <div class="each-box">
+                        <span class="original">{{sent.0}}</span><span class="description">올바른 문장입니다.</span>
+                        </div>
+                        <hr class="block-hr">
+                    {% else %}
+                        <div class="each-box wrong">
+                        <div class="original">{{sent.0}}</div>
+                        <div class="change-box">
+                            <div class="changed">
+                            {{sent.2}}
+                            </div>
+                            <div class="wrong-sentence">
+                            {{sent.1}}
+                            </div>
+                        </div>
+                    </div>
+                    <br><br><hr class="block-hr">
+                    {% endif %}
+                  {% endfor %}
+                  <!--
+                    <div class="each-box">
+                        <span class="original">높임말 교정기입니다.</span><span class="description">올바른 문장입니다.</span>
+                    </div>
+                  <hr class="block-hr">
+                    <div class="each-box wrong">
+                        <div class="original">커피가</div>
+                        <div class="change-box">
+                            <div class="changed">
+                            나왔습니다.
+                            </div>
+                            <div class="wrong-sentence">
+                            나오셨습니다.
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+            <div class="menu-box">
+                <label for="input-btn" ><a href="/input"><i class="ri-edit-2-line"></i>
+               <small>입력</small></a>
+               </label>
+               <label for="submit-btn" class="activated"><i class="ri-format-clear"></i>
+               <small>교정</small>
+                </label>
+               <label for="info-btn"><a href="/info"><i class="ri-group-line"></i>
+                   <small>팀원</small></a>
+                </label>
+            </div>
+            </div>
+    </div>
+    </div>
+</div>
+</div>
+</div>
 </body>
 </html>

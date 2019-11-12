@@ -38,20 +38,17 @@ def callKokoma(qu):
     print("형태소 분석 완료.")
     print(arr)
 
-
     # 동사 원형
     infinResult = ""
     infinResult, cls1 = infinVerb(arr)
-
+    upperflag = ckUpper(arr)
     # print("겹문장 : ", twistSentVerbArr)
-
-    return arr, infinResult, cls1
+    return arr, infinResult, cls1, upperflag
 
 #동사 원형 복원
 def infinVerb(arr):
 
     que = []
-
     # 이전 단어 저장
 
     xtoken = []
@@ -73,7 +70,6 @@ def infinVerb(arr):
                     que = []
                     #("겹문장 인식")
                     #print(twistSentVerbQue)
-
 
         if token2[1] in N:
             if not que:  # 만약 큐에 아무것도 없으면
@@ -178,5 +174,3 @@ def chUptoLow(arr, upindx):
         if arr.index(token2) != upindx:
             sent = sent + token2[0]
     print("\n**낮춤말로 변환**\n"+sent)
-
-

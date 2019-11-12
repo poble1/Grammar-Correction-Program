@@ -2,9 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from konlpy.tag import Kkma
-
 from konlpy.utils import pprint
-
 import sys
 
 from . import dependency_parser as dp
@@ -19,29 +17,48 @@ from .form import PostForm
 def index(request):
     if request.method == "GET":
         return HttpResponseRedirect('input')
-
-
+def info(request):
+    return render(request, 'elections/info.html')
 
 #1. 처음 html에서 빈 입력공간 보여줌
 #2. 입력 값 처리
-# 구분? 빈공간 form get으로 /처리 post
+# 구분? 빈공간 form get 으로 /처리 post
+
 def newpost(request):
     if request.method == "POST":
         form = PostForm(request.POST)
 
         qu = (request.POST.get('text'))
-        qu = qu.strip("\n")
+        ##qu에 문장들 들어온다
+        texts = []
 
-        print('start initializing : ', qu)
+        sentList = []
+        result = ""
+
+
         kkma = Kkma()
-        kkma.nouns('initializing')
+        texts = kkma.sentences(qu)
+        for text in texts:
+            text = text.strip("\n")
+            print('start initializing : ', text)
+            kkma = Kkma()
+            kkma.nouns('initializing')
 
-        #형태소 분석 시작
-        answer = ""
-        answer = start(qu)
+            #형태소 분석 시작
+            answer, rowVerb, rightVerb = start(text)
+
+            temp = []
+            temp.append(answer)
+            temp.append(rowVerb)
+            temp.append(rightVerb)
+            sentList.append(temp)
+
+            ## 리스트 [['주문하신 커피가 ', '나오셨습니다.', '나왔습니다']]
+            #print(sentList)
+
 
         if form.is_valid():
-            return render(request, 'elections/output.html', {'string': answer})
+            return render(request, 'elections/output.html', {'sentList': sentList})
 
     else:
         form = PostForm()
@@ -51,29 +68,37 @@ def start(qu):
     init = []
 
     #형태소 분석기 실행
-    KkoArr, infinResult, cls1 = koko.callKokoma(qu)
-    komoranResult = komo.callKomoran(qu)
+    KkoArr, infinResult, cls1, upperflag1 = koko.callKokoma(qu)
+    komoranResult, upperflag2 = komo.callKomoran(qu)
+    upperflag = upperflag1
 
-    if infinResult == "-1": #만약 높임 표현이 아니면
+    if upperflag1 == "-1": #만약 높임 표현이 아니면
         print("높임표현 의심")
         infinResult = komoranResult  #코모란 넣음
+        upperflag = upperflag2
 
     # 만약 원형에 '시'가 있으면
     if ckInfin(infinResult) == 1:
         print("시 탐지")
         #코모란 실행
         infinResult = komoranResult
+        upperflag = upperflag2
 
-        # 만약 격틀사전에 없다면
+
+
+    # 만약 격틀사전에 없다면
     ckhuman = []
     if mg.ckVerbDic(infinResult) == -1:
         infinResult = komoranResult
+        upperflag = upperflag2
     else:
         ckhuman = mg.ckVerbDic(infinResult)
 
     print("원형 : " + infinResult)
     print("동사-주어 관계:", ckhuman)
 
+    if upperflag == -1:
+        return qu, "-1", ""
 # 그 동사가 인간에 쓰일 수 있는지 가능:1, 블가:-1
     isrightVerb = ckVerbHuman(ckhuman)
     dpTokens, subj, root = dp.findNSUBJ(qu)
@@ -101,16 +126,27 @@ def start(qu):
         print("인간 아님")
 
     answer = ""
-    verb=""
+
+    temp = qu.split(" ")
+
+    verb = ""
+    rowVerb = temp[-1]
+
+    if(infinResult == -1):
+        answer = qu
+        rowVerb = "-1"
+        return answer, rowVerb, verb
+
     #옳은 문장인지 체크
-    corTag=cor.ckSent(isrightVerb, ishumanNoun)
+    corTag = cor.ckSent(isrightVerb, ishumanNoun, upperflag)
     if corTag == -1: #옳지 않으면
         verb = cor.cgVerb(KkoArr)
-        answer = cor.cgSent(qu, root, cls1)
+        answer = cor.cgSent(qu, rowVerb)
     else:
-        answer = "올바른 표현입니다."
+        answer = qu
+        rowVerb = "-1"
 
-    return answer
+    return answer, rowVerb, verb
 
 #'시' 유무 판단
 def ckInfin(infinResult):
@@ -131,3 +167,5 @@ def output(request):
     contents = Content.objects.all()
     context = {'contents': contents} #context에 모든 정보를 저장
     return render(request, 'elections/output.html', context)
+
+

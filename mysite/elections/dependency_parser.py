@@ -24,5 +24,6 @@ def findNSUBJ(text):
             nsubj = token.text.content
         elif token.dependency_edge.label == enums.DependencyEdge.Label.ROOT:
             root = token.text.content
+        ##root와 종속된 nn찾기
 
     return tokens, nsubj, root

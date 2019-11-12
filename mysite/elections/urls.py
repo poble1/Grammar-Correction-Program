@@ -7,4 +7,6 @@ urlpatterns = [
     url('input', views.newpost),
     url('output', views.output),
     url('index', views.index),
+    url('info', views.info),
+
 ]
