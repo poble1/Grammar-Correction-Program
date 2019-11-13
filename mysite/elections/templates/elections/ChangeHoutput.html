@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
-  <title>높임말 교정기</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -12,13 +10,11 @@
   <link href="https://cdn.remixicon.com/releases/v2.0.0/remixicon.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,500,700,900&display=swap" rel="stylesheet">
   <style>
-      a:link { color: white; text-decoration: none;}
-      a:visited { color: white; text-decoration: none;}
-      a:hover { color: #C5C5C5; text-decoration: none;}
+     a:link { color: white; text-decoration: none;}
+     a:visited { color: white; text-decoration: none;}
+     a:hover { color: #C5C5C5; text-decoration: none;}
 
-      b{font-size: 15px; color : gray;font-weight: normal; padding:25px;}
-
-      body{
+     body{
           background-color:white;
           //background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
           font-family: 'Noto Sans KR', sans-serif;
@@ -64,9 +60,9 @@
           padding-left:20px;
       }
       .box-header h3 {
-          padding-top: 6px;
-          padding-bottom: 6px;
+          padding:0px;
           margin:0px;
+          margin-bottom: 4px;
           font-size:20px;
           line-height: 5px;
       }
@@ -80,10 +76,13 @@
           background-color:#F1F1F1;
           display:inline;
           float:left;
+          height:465px;
       }
       .input-box {
           width:100%;
-          display:inline;
+          padding:20px;
+          padding-top:20px;
+          color:#242424;
       }
       .input-box input {
           width:100%;
@@ -95,7 +94,6 @@
           border:none;
           padding:20px;
           color:#242424;
-          font-size:15px;
       }
       textarea:focus {
           outline:none;
@@ -106,7 +104,7 @@
           float:right;
           height:465px;
           background-color:#FFCF62;
-          padding-top:140px;
+          padding-top:100px;
       }
       .menu-box label {
           color:white;
@@ -134,9 +132,64 @@
       #submit-btn{
           display:none
       }
+      .each-box {
+          padding-top:30px;
+          //border-bottom:1px solid #C5C5C5;
+          padding-bottom:10px;
+          font-size:20px;
+      }
+      .each-box .original {
+          background-color:#3FD57F;
+          color:white;
+          padding:5px;
+          padding-left:10px;
+          padding-right:10px;
+          border-radius: 10px;
+      }
+      .each-box .description {
+          padding-left:10px;
+          padding-right:10px;
+          color:#3FD57F;
+      }
+
+      .each-box.wrong {
+          padding-top:10px;
+          padding-bottom:10px;
+      }
+      .each-box.wrong .original {
+          background-color:#F1F1F1;
+          color:#242424;
+          display:inline;
+          height:40px;
+          float:left;
+          vertical-align: bottom;
+          padding-top:34px;
+      }
+      .each-box.wrong .wrong-sentence {
+          color:red;
+          text-decoration: line-through;
+          margin-top:10px;
+      }
+      .each-box.wrong .changed {
+          color:red;
+          background-color:red;
+          padding:12px;
+          color:white;
+          padding-left:5px;
+          padding-right:5px;
+          border-radius: 10px;
+          text-align: center;
+      }
+      .each-box.wrong .change-box {
+          display:inline;
+          float:left;
+          line-height: 10px;
+      }
+      .block-hr{
+          display:block;
+      }
   </style>
 </head>
-
 <body>
 <div id="viewport">
 
@@ -147,54 +200,43 @@
         <div class="title-box"><i class="ri-double-quotes-l"></i><br>높임말<br>교정기</div>
         </div>
 </div>
-
     <div class="col-md-8">
         <div class="div-middle">
             <div class="wrapper" style="width:100%">
-            <div class="box-contents">
+            <div class="box-contents"; style="overflow:scroll;" >
               <div class="box-header">
-                  <h3>소 개</h3>
-              </div>
-                <form class="input-box">
-                    <center>
-                        <br>
+                  <h3>낮춤말 변환</h3>
+                  <small>아래는 교정된 문장입니다.</small>
+                </div>
+              <div class="input-box">
+                  {% for sent in sentList %}
+                        {{sent.0}} {{sent.1}}
                     <br>
-                    <b><i class="ri-home-2-line"></i>팀장 : 장윤정 </b>
-
-                    <b><i class="ri-home-2-line"></i> 팀원 : 임리나 </b>
-                    <br><br>
-                    <br>
-                    <b><i class="ri-home-2-line"></i> 지도교수 :  이재성 교수님</b>
-                    <br><br>
-                    <br>
-                    <b><i class="ri-home-2-line"></i> 디자인 : 구본철</b><br><br>
-                    </center>
-                </form>
-
+                  {% endfor %}
+                </div>
             </div>
-
-                <div class="menu-box">
-                    <label for="input-btn" ><a href="/index"><i class="ri-edit-2-line"></i>
-                        <small>입력</small></a>
-                    </label>
+            <div class="menu-box">
+                <label for="input-btn" ><a href="/input"><i class="ri-edit-2-line"></i>
+               <small>입력</small></a>
+               </label>
+               <label for="submit-btn"><i class="ri-format-clear"></i>
+               <small>교정</small>
+                </label>
                 <label for="H-btn"><a href="/changeH"><i class="ri-message-2-line"></i>
                     <small>높임</small></a>
                 </label>
-                    <label for="info-btn" class="activated"><i class="ri-group-line"></i>
-                        <small>소개</small>
-                    </label>
-                </div>
-
-
-
+                <label for="L-btn" class="activated"><i class="ri-chat-check-line"></i>
+               <small>낮춤</small>
+                </label>
+               <label for="info-btn"><a href="/info"><i class="ri-group-line"></i>
+                   <small>소개</small></a>
+                </label>
+            </div>
+            </div>
     </div>
     </div>
-
-</div>
 </div>
 </div>
 </div>
 </body>
-
-
 </html>

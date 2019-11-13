@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en">
 <head>
   <title>높임말 교정기</title>
   <meta charset="utf-8">
@@ -15,8 +15,6 @@
       a:link { color: white; text-decoration: none;}
       a:visited { color: white; text-decoration: none;}
       a:hover { color: #C5C5C5; text-decoration: none;}
-
-      b{font-size: 15px; color : gray;font-weight: normal; padding:25px;}
 
       body{
           background-color:white;
@@ -64,9 +62,9 @@
           padding-left:20px;
       }
       .box-header h3 {
-          padding-top: 6px;
-          padding-bottom: 6px;
+          padding:0px;
           margin:0px;
+          margin-bottom: 4px;
           font-size:20px;
           line-height: 5px;
       }
@@ -106,7 +104,7 @@
           float:right;
           height:465px;
           background-color:#FFCF62;
-          padding-top:140px;
+          padding-top:100px;
       }
       .menu-box label {
           color:white;
@@ -134,9 +132,11 @@
       #submit-btn{
           display:none
       }
+      #L-btn{
+          display:none
+      }
   </style>
 </head>
-
 <body>
 <div id="viewport">
 
@@ -147,53 +147,47 @@
         <div class="title-box"><i class="ri-double-quotes-l"></i><br>높임말<br>교정기</div>
         </div>
 </div>
-
     <div class="col-md-8">
         <div class="div-middle">
             <div class="wrapper" style="width:100%">
+
+
             <div class="box-contents">
               <div class="box-header">
-                  <h3>소 개</h3>
-              </div>
-                <form class="input-box">
-                    <center>
-                        <br>
-                    <br>
-                    <b><i class="ri-home-2-line"></i>팀장 : 장윤정 </b>
-
-                    <b><i class="ri-home-2-line"></i> 팀원 : 임리나 </b>
-                    <br><br>
-                    <br>
-                    <b><i class="ri-home-2-line"></i> 지도교수 :  이재성 교수님</b>
-                    <br><br>
-                    <br>
-                    <b><i class="ri-home-2-line"></i> 디자인 : 구본철</b><br><br>
-                    </center>
-                </form>
-
+                  <h3>높임말 <i class="ri-send-plane-2-line"></i> 낮춤말 변환</h3>
+                  <small>아래에 문장을 입력해주세요</small>
+                </div>
+              <form method="post" class="input-box">
+                    {%csrf_token%}
+                    {{form.as_table}}
+                  <input type = submit class="btn btn-secondary btn-lg" id="L-btn" value="검사하기">
+              </form>
             </div>
 
-                <div class="menu-box">
-                    <label for="input-btn" ><a href="/index"><i class="ri-edit-2-line"></i>
-                        <small>입력</small></a>
-                    </label>
-                <label for="H-btn"><a href="/changeH"><i class="ri-message-2-line"></i>
+
+            <div class="menu-box">
+               <label for="input-btn"><a href="/input"><i class="ri-edit-2-line"></i>
+                   <small>입력</small></a>
+               </label>
+               <label for="submit-btn"><i class="ri-format-clear"></i>
+               <small>교정</small>
+                </label>
+                <label for="H-btn" class="activated"><i class="ri-message-2-line"></i>
                     <small>높임</small></a>
                 </label>
-                    <label for="info-btn" class="activated"><i class="ri-group-line"></i>
-                        <small>소개</small>
-                    </label>
-                </div>
-
-
-
+                <label for="L-btn" ><i class="ri-chat-check-line"></i>
+                    <small>낮춤</small>
+                </label>
+                <label for="info-btn"><a href="/info"><i class="ri-group-line"></i>
+                    <small>소개</small></a>
+                </label>
+            </div>
+            </div>
     </div>
     </div>
-
 </div>
 </div>
-</div>
-</div>
+    </div>
 </body>
 
 

@@ -32,7 +32,7 @@ def callKomoran(text):
 
     # 동사가 높임말인지 검사
 
-    return infinResult, ckUpper(arr)
+    return arr,infinResult, ckUpper(arr)
 
 #동사 원형 복원
 def infinVerb(arr):

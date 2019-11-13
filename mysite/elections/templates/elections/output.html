@@ -14,6 +14,11 @@
      a:visited { color: white; text-decoration: none;}
      a:hover { color: #C5C5C5; text-decoration: none;}
 
+     re:link { color: gray; text-decoration: none;}
+     re:visited { color: white; text-decoration: none;}
+     re:hover { color: #C5C5C5; text-decoration: none;}
+
+
      body{
           background-color:white;
           //background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
@@ -104,7 +109,7 @@
           float:right;
           height:465px;
           background-color:#FFCF62;
-          padding-top:140px;
+          padding-top:100px;
       }
       .menu-box label {
           color:white;
@@ -225,9 +230,17 @@
                             <div class="wrong-sentence">
                             {{sent.1}}
                             </div>
+                     </div>
                         </div>
-                    </div>
-                    <br><br><hr class="block-hr">
+<!--
+                  <form method="post">
+                      <input type = "submit"  id="submit-btn2" name = "test1" value="검사하기">
+                  </form>
+-->
+                    <br>
+                  <a href="/solve/{{sent.2}}/{{sent.3}}" style = "color: gray; font-size:15px; float: right; " onclick="window.open(this.href, '_blank', 'width=500px,height=300px,toolbars=no,scrollbars=no'); return false;">분석결과</a>
+
+                  <br><hr class="block-hr">
                     {% endif %}
                   {% endfor %}
                   <!--
@@ -256,8 +269,14 @@
                <label for="submit-btn" class="activated"><i class="ri-format-clear"></i>
                <small>교정</small>
                 </label>
+                 <label for="H-btn"><a href="/changeH"><i class="ri-message-2-line"></i>
+                    <small>높임</small></a>
+                </label>
+                <label for="L-btn"><i class="ri-chat-check-line"></i>
+                    <small>낮춤</small>
+                </label>
                <label for="info-btn"><a href="/info"><i class="ri-group-line"></i>
-                   <small>팀원</small></a>
+                   <small>소개</small></a>
                 </label>
             </div>
             </div>
