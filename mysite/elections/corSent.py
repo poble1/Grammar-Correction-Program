@@ -158,8 +158,12 @@ def cgVerb(arr):
             mid = ((ord(result[i-1]) - ord('가')) - (588*cho)) // 28
             jong = (ord(result[i-1]) - ord('가')) - (588*cho) - 28*mid
             print(result[i-1], jong, mid, cho)
-
-            if jong == 0 and mid == JUNGSUNG_LIST.index('ㅣ'):
+            if result[i-1] in exceptArr:
+                indextemp = exceptArr.index(result[i-1])
+                result2 = result2[:-1] + exceptAns[indextemp]
+                i = i + 1
+                continue
+            elif jong == 0 and mid == JUNGSUNG_LIST.index('ㅣ'):
                 temp = 44032 + (cho * 588) + (JUNGSUNG_LIST.index('ㅕ') * 28) + JONGSUNG_LIST.index('ㅆ')
                 result2 = result2[:-1] + chr(temp)
                 i = i+1
@@ -169,11 +173,7 @@ def cgVerb(arr):
                 result2 = result2[:-1] + chr(temp)
                 i = i+1
                 continue
-            elif result[i-1] in exceptArr:
-                indextemp = exceptArr.index(result[i-1])
-                result2 = result2[:-1] + exceptAns[indextemp]
-                i = i + 1
-                continue
+
         elif result[i] in JONGSUNG_LIST:
             cho = (ord(result[i-1]) - ord('가'))//588
             mid = ((ord(result[i-1]) - ord('가')) - (588*cho)) // 28

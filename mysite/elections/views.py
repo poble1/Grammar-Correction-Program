@@ -121,6 +121,7 @@ def start(qu):
         print("높임표현 의심")
         infinResult = komoranResult  #코모란 넣음
         upperflag = upperflag2
+        iscomoran = True
 
     # 만약 원형에 '시'가 있으면
     if ckInfin(infinResult) == 1:
@@ -128,6 +129,7 @@ def start(qu):
         #코모란 실행
         infinResult = komoranResult
         upperflag = upperflag2
+        iscomoran = True
 
     # 만약 격틀사전에 없다면
     ckhuman = []
